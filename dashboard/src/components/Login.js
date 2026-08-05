@@ -14,7 +14,7 @@ const Login = ({ onAuthSuccess }) => {
     setError("");
     setLoading(true);
     try {
-      const res = await fetch("http://localhost:3002/login", {
+      const res = await fetch("https://zerodha-clone-backend-uc3s.onrender.com/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

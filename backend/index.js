@@ -14,7 +14,21 @@ const LocalStrategy=require("passport-local");
 const UserModel=require("./models/UserModel");
 const app = express();
 app.use(cors({
-  origin: ["http://localhost:3000", "http://localhost:3001", "http://localhost:3002"],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc) and any localhost or deployed origin
+    const allowed = [
+      "http://localhost:3000",
+      "http://localhost:3001",
+      "http://localhost:3002",
+      "https://zerodha-clone-backend-uc3s.onrender.com",
+    ];
+    if (!origin || allowed.includes(origin)) {
+      callback(null, true);
+    } else {
+      // Allow any other origin in case frontend is deployed elsewhere
+      callback(null, true);
+    }
+  },
   credentials: true,
 }));
 app.use(bodyParser.json());

@@ -9,7 +9,7 @@ const Orders = () => {
   const fetchOrders = () => {
     setLoading(true);
     axios
-      .get("http://localhost:3002/allOrders")
+      .get("https://zerodha-clone-backend-uc3s.onrender.com/allOrders")
       .then((res) => {
         setOrders(res.data);
         setLoading(false);

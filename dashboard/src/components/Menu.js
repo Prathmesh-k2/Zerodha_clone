@@ -10,7 +10,7 @@ const Menu = () => {
 
   const handleLogout = async () => {
     try {
-      await fetch("http://localhost:3002/logout", { credentials: "include" });
+      await fetch("https://zerodha-clone-backend-uc3s.onrender.com/logout", { credentials: "include" });
     } catch (_) {}
     // Go back to frontend landing page
     window.location.href = "http://localhost:3000";

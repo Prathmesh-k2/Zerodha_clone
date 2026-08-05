@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 // Dashboard URL — change port if your dashboard runs on a different port
 const DASHBOARD_URL = "http://localhost:3001";
-const API_URL = "http://localhost:3002";
+const API_URL = "https://zerodha-clone-backend-uc3s.onrender.com";
 
 function SignUp() {
     const navigate = useNavigate();
