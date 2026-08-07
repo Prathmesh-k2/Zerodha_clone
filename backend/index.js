@@ -35,7 +35,9 @@ app.use(cors({
   credentials: true,
 }));
 app.use(bodyParser.json());
-const isProduction = process.env.NODE_ENV === "production";
+// On Render, PORT is auto-set. On local it's not — use this to detect production
+// This way you don't need to manually set NODE_ENV on Render
+const isProduction = !!process.env.RENDER; // Render sets this automatically
 const sessionOption = {
   secret: process.env.SECRET || "zerodha_secret",
   resave: false,
