@@ -13,29 +13,39 @@ const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const UserModel=require("./models/UserModel");
 const app = express();
+const allowedOrigins = [
+  "http://localhost:3000",
+  "http://localhost:3001",
+  "http://localhost:3002",
+  "https://zerodha-clone-backend-uc3s.onrender.com",
+  "https://zerodha-clone-dashboard-373f8piay-prathmeshs-projects-e9602d09.vercel.app",
+  // Allow any *.vercel.app preview deployments
+];
+
 app.use(cors({
   origin: function (origin, callback) {
-    // Allow requests with no origin (mobile apps, curl, etc) and any localhost or deployed origin
-    const allowed = [
-      "http://localhost:3000",
-      "http://localhost:3001",
-      "http://localhost:3002",
-      "https://zerodha-clone-backend-uc3s.onrender.com",
-    ];
-    if (!origin || allowed.includes(origin)) {
-      callback(null, true);
-    } else {
-      // Allow any other origin in case frontend is deployed elsewhere
-      callback(null, true);
-    }
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    // Allow exact matches
+    if (allowedOrigins.includes(origin)) return callback(null, true);
+    // Allow any vercel.app subdomain (preview deployments)
+    if (origin.endsWith(".vercel.app")) return callback(null, true);
+    callback(new Error("Not allowed by CORS: " + origin));
   },
   credentials: true,
 }));
 app.use(bodyParser.json());
+const isProduction = process.env.NODE_ENV === "production";
 const sessionOption = {
   secret: process.env.SECRET || "zerodha_secret",
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    httpOnly: true,
+    secure: isProduction,       // HTTPS only in production (Render)
+    sameSite: isProduction ? "none" : "lax", // "none" required for cross-site cookies
+    maxAge: 1000 * 60 * 60 * 24, // 1 day
+  },
 };
 app.use(session(sessionOption));
 
