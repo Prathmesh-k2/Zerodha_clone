@@ -1,331 +1,316 @@
-# Zerodha Clone
+# 📈 Zerodha Clone - Full Stack Stock Trading & Investment Platform
 
-A responsive web application that replicates the core features and user interface of Zerodha, a popular stock trading and brokerage platform. This project demonstrates modern web development practices with a clean, functional design for trading interfaces.
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-brightgreen?style=for-the-badge&logo=vercel)](https://zerodha-clone-frontend-8wvz-phi.vercel.app/)
+[![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react)](https://reactjs.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-Express-339933?style=for-the-badge&logo=nodedotjs)](https://nodejs.org/)
+[![MongoDB](https://img.shields.io/badge/MongoDB-Database-47A248?style=for-the-badge&logo=mongodb)](https://www.mongodb.com/)
+[![Render](https://img.shields.io/badge/Backend-Render-46E3B7?style=for-the-badge&logo=render)](https://render.com/)
+
+A modern, full-stack web application replicating the core user experience, landing pages, and interactive trading dashboard of **Zerodha (Kite)** — India's premier stock brokerage platform.
+
+🔗 **Live Application URL**: [https://zerodha-clone-frontend-8wvz-phi.vercel.app/](https://zerodha-clone-frontend-8wvz-phi.vercel.app/)
 
 ---
 
 ## 📋 Table of Contents
 
-- [Project Overview](#project-overview)
-- [Features](#features)
-- [Technology Stack](#technology-stack)
-- [Project Structure](#project-structure)
-- [Getting Started](#getting-started)
-- [Installation](#installation)
-- [How to Use](#how-to-use)
-- [Contributing](#contributing)
-- [License](#license)
+- [🌟 Live Demo](#-live-demo)
+- [🎯 Project Overview](#-project-overview)
+- [✨ Key Features](#-key-features)
+  - [1. Landing Page (Frontend)](#1-landing-page-frontend)
+  - [2. Trading Dashboard (Kite Replica)](#2-trading-dashboard-kite-replica)
+  - [3. Backend API & Database](#3-backend-api--database)
+- [🛠️ Technology Stack](#️-technology-stack)
+- [📁 Project Architecture & Directory Structure](#-project-architecture--directory-structure)
+- [🔌 API Reference](#-api-reference)
+- [🚀 Getting Started & Local Installation](#-getting-started--local-installation)
+  - [Prerequisites](#prerequisites)
+  - [1. Clone Repository](#1-clone-repository)
+  - [2. Environment Configuration](#2-environment-configuration)
+  - [3. Backend Setup](#3-backend-setup)
+  - [4. Frontend Setup](#4-frontend-setup)
+  - [5. Dashboard Setup](#5-dashboard-setup)
+- [📱 Responsive Design](#-responsive-design)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [👨‍💻 Author](#-author)
+
+---
+
+## 🌟 Live Demo
+
+Experience the live application hosted on production servers:
+
+- 🚀 **Frontend & Landing Page**: [https://zerodha-clone-frontend-8wvz-phi.vercel.app/](https://zerodha-clone-frontend-8wvz-phi.vercel.app/)
+- ⚡ **Backend REST API**: Hosted on Render (`zerodha-clone-backend-uc3s.onrender.com`)
 
 ---
 
 ## 🎯 Project Overview
 
-This is a **frontend clone** of the Zerodha trading platform, focusing on replicating the user interface and core interactive components. It provides users with a realistic experience of browsing stock information, viewing dashboards, and navigating through a trading platform interface.
+This project is a comprehensive, full-stack clone of Zerodha designed to simulate a production-ready stock brokerage ecosystem. It consists of three decoupled micro-services:
 
-**Key Purpose:**
-- Educational project to practice web development
-- Demonstrate proficiency in frontend technologies
-- Showcase UI/UX implementation skills
-- Build a responsive trading dashboard interface
+1. **Frontend (`/frontend`)**: Replicates Zerodha's main product pages, pricing breakdowns, about page, customer support portal, and signup flows.
+2. **Dashboard (`/dashboard`)**: Replicates the trading terminal (**Kite**), providing interactive watchlists, stock search, buy/sell popups, portfolio holdings, active positions, order ledgers, funds view, and visual charts.
+3. **Backend (`/backend`)**: An Express.js REST API backed by MongoDB for user authentication, managing portfolio holdings, active market positions, and real-time order processing.
 
 ---
 
-## ✨ Features
+## ✨ Key Features
 
-- **Responsive Design**: Works seamlessly across desktop, tablet, and mobile devices
-- **Interactive Dashboard**: Displays trading information and market data
-- **Navigation Interface**: Intuitive navigation menu mirroring Zerodha's structure
-- **Stock Browsing**: Browse and view stock market information
-- **Modern UI**: Clean, professional interface with smooth interactions
-- **User-Friendly Navigation**: Organized layout for easy access to trading features
+### 1. Landing Page (Frontend)
+- **Home & Hero Section**: Clean overview of Zerodha's trading ecosystem with direct call-to-action buttons.
+- **Product Ecosystem Showcase**: Detailed overview of core platforms (Kite, Console, Coin, Varsity, Sentinel).
+- **Transparent Pricing**: Detailed breaking down of equity delivery (free), intraday charges (₹20/trade), and mutual fund investments.
+- **Support & Ticket Desk**: Search bar for support topics and fast ticket creation layout.
+- **About Us**: Company overview, leadership profiles, and mission philosophy.
+- **User Signup Interface**: Seamless portal redirection for new user onboarding.
+
+### 2. Trading Dashboard (Kite Replica)
+- **Interactive Stock Watchlist**:
+  - Search and browse popular equity tickers (INFY, RELIANCE, TCS, HDFCBANK, etc.).
+  - Hover action shortcuts: Instant **Buy**, **Sell**, and **Chart** view triggers.
+- **Buy & Sell Order Windows**:
+  - Modal windows to specify quantity, target price, order types (MIS vs CNC), and execute real-time orders.
+  - Automatically posts orders to the database and updates the ledger.
+- **Holdings Management**:
+  - Comprehensive table of stock assets owned.
+  - Automatic computation of total investment value, current market value, net returns %, and day P&L status.
+- **Positions Tracker**:
+  - Real-time display of active day positions with profit/loss color indicators.
+- **Order Ledger**:
+  - Historical log of executed Buy/Sell transactions with timestamps and prices.
+- **Interactive Visual Analytics**:
+  - **Doughnut Chart**: Visual representation of portfolio diversification.
+  - **Vertical Bar Graph**: Graphical summary of holding values across assets using Chart.js.
+- **Mobile-Responsive Experience**:
+  - Mobile bottom navigation and responsive drawer toggle for watchlists on small viewports.
+
+### 3. Backend API & Database
+- **User Authentication**: Secure signup/login/logout endpoints powered by `passport` and `passport-local-mongoose` with session persistence.
+- **RESTful Endpoints**: Dedicated routes for fetching and modifying `holdings`, `positions`, and `orders`.
+- **CORS Configured**: Full cross-origin setup enabling smooth communication between localhost, Vercel deployments, and Render backend services.
+- **MongoDB Schema Models**: Structured data models using Mongoose for robust data validation.
 
 ---
 
-## 🛠 Technology Stack
+## 🛠️ Technology Stack
 
-### Frontend Technologies
+### **Frontend & Dashboard Services**
+| Technology | Description |
+| :--- | :--- |
+| **React 19** | Modern UI components and state management |
+| **React Router v7** | Client-side routing and page transitions |
+| **Material UI (`@mui/material`)** | Component UI library & Material icons |
+| **Chart.js (`react-chartjs-2`)** | Interactive data visualization & financial charts |
+| **Axios** | HTTP client for backend REST API calls |
+| **CSS3** | Responsive grid layouts, flexbox, and custom styling |
 
-| Technology | Usage | Percentage |
-|-----------|-------|-----------|
-| **JavaScript** | Core interactivity and logic | 75.1% |
-| **CSS** | Styling and responsive design | 22.6% |
-| **HTML** | Markup and structure | 2.3% |
-
-### Tools & Frameworks
-- **Vanilla JavaScript**: No frameworks - pure JavaScript for interactivity
-- **CSS3**: Modern CSS features for responsive layouts and animations
-- **HTML5**: Semantic markup for better structure
-- **Flexbox/Grid**: For responsive layout management
-- **Git**: Version control and collaboration
+### **Backend & Database Services**
+| Technology | Description |
+| :--- | :--- |
+| **Node.js** | JavaScript runtime environment |
+| **Express.js (v5)** | Web application framework for REST APIs |
+| **MongoDB & Mongoose** | NoSQL database and Object Data Modeling (ODM) |
+| **Passport.js** | Authentication middleware for session-based login/signup |
+| **Express Session** | Server-side session storage |
+| **Dotenv & CORS** | Environment configuration & Cross-Origin Resource Sharing |
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Architecture & Directory Structure
 
 ```
 Zerodha_clone/
-├── index.html              # Main landing page
-├── css/
-│   ├── style.css          # Main stylesheet
-│   └── responsive.css     # Responsive design styles
-├── js/
-│   ├── main.js            # Core JavaScript logic
-│   ├── navigation.js      # Navigation functionality
-│   └── trading.js         # Trading feature logic
-├── assets/
-│   ├── images/            # Icons and images
-│   └── data/              # Mock data files
-├── README.md              # This file
-└── .gitignore             # Git ignore rules
+├── backend/                        # Express REST API & Database Models
+│   ├── models/                     # Mongoose Schema Definitions
+│   │   ├── HoldingsModel.js        # Schema for user holdings
+│   │   ├── OrdersModel.js          # Schema for stock orders
+│   │   ├── PositionModel.js        # Schema for active positions
+│   │   └── UserModel.js            # Passport user schema
+│   ├── schemas/                    # Raw schema definitions
+│   ├── index.js                    # Server entrypoint & API endpoints
+│   ├── package.json                # Backend dependencies & scripts
+│   └── .env                        # Environment configuration
+│
+├── dashboard/                      # Kite Trading Terminal (React App)
+│   ├── public/                     # Static assets & HTML template
+│   ├── src/
+│   │   ├── components/             # Dashboard UI components
+│   │   │   ├── BuyActionWindow.js  # Order placement modal (BUY)
+│   │   │   ├── SellActionWindow.js # Order placement modal (SELL)
+│   │   │   ├── Dashboard.js        # Main container grid
+│   │   │   ├── Holdings.js         # Holdings portfolio component
+│   │   │   ├── Positions.js        # Positions tracking table
+│   │   │   ├── Orders.js           # Order history log
+│   │   │   ├── WatchList.js        # Stock search & watchlist
+│   │   │   ├── DoughnoutChart.js   # Portfolio visual chart
+│   │   │   ├── Funds.js            # Cash & margins view
+│   │   │   ├── Login.js / Signup.js# Authentication views
+│   │   │   └── TopBar.js           # Header navigation
+│   │   ├── index.js                # React root entrypoint
+│   │   └── index.css               # Global terminal styles & responsiveness
+│   ├── package.json                # Dashboard dependencies
+│   └── vercel.json                 # Vercel deployment routing config
+│
+├── frontend/                       # Zerodha Marketing Website (React App)
+│   ├── public/                     # Public icons, branding & assets
+│   ├── src/
+│   │   ├── landing_page/           # Modular page components
+│   │   │   ├── home/               # Landing page modules
+│   │   │   ├── products/           # Ecosystem products showcase
+│   │   │   ├── pricing/            # Pricing tables & breakdown
+│   │   │   ├── about/              # Company history & team
+│   │   │   ├── support/            # Support center & portal
+│   │   │   ├── Navbar.js           # Top main navigation bar
+│   │   │   └── footer.js           # Global footer component
+│   │   ├── index.js                # React entrypoint
+│   │   └── index.css               # Custom CSS styles
+│   ├── package.json                # Frontend dependencies
+│   └── vercel.json                 # Vercel deployment routing config
+│
+└── README.md                       # Project Documentation
 ```
 
 ---
 
-## 🚀 Getting Started
+## 🔌 API Reference
+
+### **Authentication Routes**
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `POST` | `/signup` | Registers a new user account |
+| `POST` | `/login` | Authenticates user credentials |
+| `GET` | `/logout` | Logs out the current user session |
+| `GET` | `/user` | Returns authenticated user details |
+
+### **Trading Data Routes**
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/allHoldings` | Fetches all stock holdings in the portfolio |
+| `GET` | `/allPositions` | Fetches active day positions |
+| `GET` | `/allOrders` | Fetches executed order log history |
+| `POST` | `/newOrder` | Submits a new Buy/Sell order to the server |
+
+---
+
+## 🚀 Getting Started & Local Installation
+
+Follow these steps to set up and run the full project locally on your machine.
 
 ### Prerequisites
 
-- A modern web browser (Chrome, Firefox, Safari, Edge)
-- Code editor (VS Code, Sublime Text, etc.) - for development
-- Git (for cloning and version control)
-- Node.js & npm (optional, if using build tools or local server)
+Ensure you have the following installed:
+- **Node.js** (v18.0 or higher)
+- **npm** (v9.0 or higher)
+- **MongoDB** (Local instance or [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) cloud URI)
+- **Git**
 
-### Installation
+### 1. Clone Repository
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Prathmesh-k2/Zerodha_clone.git
-   cd Zerodha_clone
-   ```
+```bash
+git clone https://github.com/Prathmesh-k2/Zerodha_clone.git
+cd Zerodha_clone
+```
 
-2. **Open in browser (Simple method)**
-   - Double-click on `index.html` to open directly in your browser
-   - Or use a local server (see below for better experience)
+### 2. Environment Configuration
 
-3. **Using Live Server (Recommended)**
-   - Install VS Code Live Server extension
-   - Right-click on `index.html` → "Open with Live Server"
-   - Or use Python's built-in server:
-     ```bash
-     # Python 3
-     python -m http.server 8000
-     # Then open http://localhost:8000
-     ```
+Create a `.env` file inside the `backend` folder:
+
+```env
+PORT=3002
+MONGO_URL=your_mongodb_connection_string
+SECRET=your_jwt_or_session_secret
+```
 
 ---
 
-## 💻 How to Use
+### 3. Backend Setup
 
-### For Users/Testing
-
-1. **Start the application**
-   - Open `index.html` in your browser or use Live Server
-
-2. **Navigation**
-   - Click through the navigation menu to explore different sections
-   - Browse stock information and trading interfaces
-   - Interact with dashboard components
-
-3. **Features to Explore**
-   - Dashboard overview
-   - Stock market data
-   - Trading interface
-   - Portfolio management (if implemented)
-
-### For Developers/Contributing
-
-#### Setting Up Development Environment
-
-1. **Install dependencies** (if any)
+1. Open terminal and navigate to the backend folder:
+   ```bash
+   cd backend
+   ```
+2. Install dependencies:
    ```bash
    npm install
    ```
-
-2. **Open project in code editor**
+3. Start the backend development server:
    ```bash
-   code .  # For VS Code
+   npm start
    ```
-
-3. **Make changes**
-   - Edit HTML files in the root directory
-   - Modify CSS in the `css/` folder
-   - Update JavaScript in the `js/` folder
-
-#### File Editing Guidelines
-
-**HTML Files:**
-- Maintain semantic HTML structure
-- Use proper heading hierarchy
-- Keep IDs and classes descriptive
-
-**CSS Files:**
-- Follow consistent naming conventions
-- Use CSS variables for colors and spacing
-- Keep responsive breakpoints organized
-
-**JavaScript Files:**
-- Use clear function names
-- Add comments for complex logic
-- Avoid global variables; use modules or IIFE patterns
-- Test functionality across browsers
-
-#### Common Development Tasks
-
-1. **Adding a new page**
-   ```bash
-   # Create new HTML file
-   # Create corresponding CSS in css/ folder
-   # Create corresponding JS in js/ folder
-   # Update navigation links
-   ```
-
-2. **Styling updates**
-   - Modify relevant CSS files
-   - Test responsiveness with browser dev tools
-   - Check cross-browser compatibility
-
-3. **Adding interactivity**
-   - Add event listeners in appropriate JS files
-   - Update related HTML elements
-   - Test functionality
-
-4. **Testing**
-   - Open DevTools (F12)
-   - Check console for errors
-   - Test on different screen sizes
-   - Verify all links and buttons work
+   *The server will run on `http://localhost:3002`.*
 
 ---
 
-## 🔄 Git Workflow
+### 4. Frontend Setup
 
-```bash
-# Create a new branch for your feature
-git checkout -b feature/your-feature-name
+1. Open a new terminal tab and navigate to the frontend folder:
+   ```bash
+   cd frontend
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Launch the development server:
+   ```bash
+   npm start
+   ```
+   *The landing page will run on `http://localhost:3000`.*
 
-# Make your changes and commit
-git add .
-git commit -m "Add descriptive commit message"
+---
 
-# Push to remote
-git push origin feature/your-feature-name
+### 5. Dashboard Setup
 
-# Create a Pull Request on GitHub
-```
+1. Open another terminal tab and navigate to the dashboard folder:
+   ```bash
+   cd dashboard
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Launch the trading dashboard:
+   ```bash
+   npm start
+   ```
+   *The Kite trading dashboard will run on `http://localhost:3001`.*
 
 ---
 
 ## 📱 Responsive Design
 
-The project is built with mobile-first approach:
-- **Desktop**: Full-featured experience
-- **Tablet**: Optimized layout for medium screens
-- **Mobile**: Touch-friendly interface with adapted navigation
-
-Test using browser DevTools:
-- Press `F12` → Toggle device toolbar (`Ctrl+Shift+M`)
-- Test on various device sizes
-
----
-
-## 🚧 Development Tips
-
-### Best Practices
-- Keep code DRY (Don't Repeat Yourself)
-- Write semantic HTML
-- Use CSS classes for styling, not IDs (where possible)
-- Comment your JavaScript code
-- Use consistent indentation (2 or 4 spaces)
-- Test regularly across different browsers
-
-### Debugging
-- Use browser Developer Tools (F12)
-- Check console for JavaScript errors
-- Inspect elements for CSS issues
-- Use console.log() for debugging JavaScript
-- Test responsive design frequently
-
-### Performance Optimization
-- Minimize CSS and JavaScript
-- Optimize images
-- Avoid inline styles
-- Use CSS Grid/Flexbox instead of floats
+The application is engineered with a mobile-responsive UI layout:
+- 🖥️ **Desktop**: Full multi-column view with persistent watchlist and side-by-side trading charts.
+- 📱 **Mobile & Tablet**: Tabbed views, responsive touch menus, collapsable watchlists, and centered action popups optimized for mobile viewports.
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how you can help:
+Contributions, issues, and feature requests are welcome! Feel free to check out the [Issues page](https://github.com/Prathmesh-k2/Zerodha_clone/issues).
 
-1. **Fork the repository**
-2. **Create a feature branch** (`git checkout -b feature/amazing-feature`)
-3. **Make your changes**
-4. **Commit your changes** (`git commit -m 'Add amazing feature'`)
-5. **Push to the branch** (`git push origin feature/amazing-feature`)
-6. **Open a Pull Request**
-
-### Guidelines
-- Follow the existing code style
-- Test your changes thoroughly
-- Add comments for new features
-- Update this README if adding new features
-- Ensure responsive design works
-
----
-
-## 📚 Learning Resources
-
-- **HTML**: [MDN HTML Reference](https://developer.mozilla.org/en-US/docs/Web/HTML)
-- **CSS**: [MDN CSS Reference](https://developer.mozilla.org/en-US/docs/Web/CSS)
-- **JavaScript**: [MDN JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
-- **Responsive Design**: [CSS-Tricks Responsive Design](https://css-tricks.com/snippets/css/a-guide-to-flexbox/)
-
----
-
-## 🐛 Known Issues & Future Improvements
-
-### Planned Features
-- [ ] Add backend API integration
-- [ ] Implement user authentication
-- [ ] Add real-time stock data
-- [ ] Create trading simulation features
-- [ ] Add dark mode
-- [ ] Implement data persistence with localStorage
-
-### Known Issues
-- None currently documented
+1. Fork the Project
+2. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push to the Branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
 
 ---
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+Distributed under the **MIT License**. See `LICENSE` for more information.
 
 ---
 
 ## 👨‍💻 Author
 
-**Prathmesh-k2**
-- GitHub: [@Prathmesh-k2](https://github.com/Prathmesh-k2)
+**Prathmesh**
+- 🌐 **Live App**: [https://zerodha-clone-frontend-8wvz-phi.vercel.app/](https://zerodha-clone-frontend-8wvz-phi.vercel.app/)
+- 💻 **GitHub**: [@Prathmesh-k2](https://github.com/Prathmesh-k2)
 
 ---
 
-## 📞 Support
-
-If you have questions or need help:
-- Open an [Issue](https://github.com/Prathmesh-k2/Zerodha_clone/issues)
-- Check existing issues for similar problems
-- Include detailed information about your problem
-
----
-
-## 🙏 Acknowledgments
-
-- Inspired by [Zerodha](https://zerodha.com/) trading platform
-- Community contributions and feedback
-- Open-source projects and resources
-
----
-
-**Last Updated**: August 2026  
-**Repository**: [Prathmesh-k2/Zerodha_clone](https://github.com/Prathmesh-k2/Zerodha_clone)
+<p align="center">Made with ❤️ for financial tech enthusiasm</p>
